@@ -1,8 +1,16 @@
 const express = require('express');
-const router = express.Router();
+const Router = express.Router();
 
-router.get('/',(req,res) => {
-    res.render('home');
+Router.get('/',(req,res)=>{
+    res.render('index',{isActiveHome:true});
 });
 
-module.exports = router;
+Router.get('/about',(req,res)=>{
+    res.render('about',{isActiveAbout:true});
+});
+
+Router.get('/contact',(req,res)=>{
+    res.render('contact',{isActiveContact:true});
+});
+
+module.exports = Router;

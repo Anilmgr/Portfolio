@@ -1,7 +1,8 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const path = require('path');
-
+const dbcon = require('./config/dbconfig');
+const routes = require('./routes/index');
 
 const app = express();
 
@@ -15,13 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', hbs({defaultLayout: 'main'}));
 app.set('view engine','handlebars');
 
-app.get('/',(req,res)=>{
-   res.render('index',{isActiveHome:true});
-});
-
-app.get('/about',(req,res)=>{
-   res.render('about',{isActiveAbout:true});
-});
+app.use('/',routes);
 
 //Error=> Page not found 404
 app.use((req,res,next) => {
